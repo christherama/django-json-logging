@@ -27,6 +27,37 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "console": {
+            "format": "{levelname} {asctime} {pathname} - line {lineno}: {message}",
+            "style": "{",
+        },
+        "json": {
+            "()": "django_json_logging.logs.JSONFormatter",  # Define the JSON formatter
+        },
+    },
+    "handlers": {
+        "stdout": {
+            "class": "logging.StreamHandler",
+            "formatter": "json"                        # Use the JSON formatter
+        },
+    },
+    "loggers": {
+        "django": {
+            "level": "ERROR",
+            "handlers": ["stdout"],
+            "propagate": False,
+        },
+        "": {
+            "level": "INFO",
+            "handlers": ["stdout"],
+            "propagate": False,
+        }
+    }
+}
 
 # Application definition
 
